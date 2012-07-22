@@ -1,0 +1,38 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{href: '/'} 
+        Zelus - All People
+      
+%section
+  .container
+    .row
+      .well
+        - if @previous_page
+          %a.btn{href: "/?page=#{@previous_page}"} &lt;&lt;
+        - if @next_page
+          %a.btn{href: "/?page=#{@next_page}"} &gt;&gt;
+        %span.pull-right
+          Page
+          = @previous_page.nil? ? "1" : (@previous_page+1).to_s
+          
+      .span12
+        %table.table.table-condensed.table-bordered
+          %thead
+            %tr
+              %th Name
+              %th Email
+              %th Phone
+          %tbody
+          - @payload.each do |row|
+            %tr{onclick: "window.location.href='/#{row['uuid']}'"}
+              %td=row['name']
+              %td=row['email']
+              %td=row['phone']
+                
+        
+        

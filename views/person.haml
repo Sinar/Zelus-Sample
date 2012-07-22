@@ -1,0 +1,59 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{href: '/'} Zelus - Person
+      
+%section
+  .container
+    .row
+      .well
+        %a.btn{href: "/"}
+          %i.icon-arrow-left
+          Back to all people
+      
+    .row    
+      %h3
+        =@payload['person']['name']
+      %br
+      %table.table
+        %tr
+          %th.span2 Email
+          %td
+            %a{href: "mailto:#{@payload['person']['email']}"}=@payload['person']['email']
+        %tr
+          %th Phone
+          %td=@payload['person']['phone']
+        %tr
+          %th Twitter
+          %td
+            %a{href:@payload['person']['twitter']}=@payload['person']['twitter']      
+        %tr
+          %th LinkedIn
+          %td
+            %a{href:@payload['person']['linkedin']}=@payload['person']['linkedin']
+        %tr
+          %th Facebook
+          %td
+            %a{href:@payload['person']['facebook']}=@payload['person']['facebook']
+
+    .row    
+      %h3
+        Parties
+      - @payload['parties'].each do |party|
+        %h4
+          =party['name']
+          %small
+            (#{party['code']})
+        
+        %br
+        %table.table
+          %tr
+            %th.span2 Malay name
+            %td=party['name_in_malay']
+          %tr
+            %th Founded in
+            %td=party['founded_in']
